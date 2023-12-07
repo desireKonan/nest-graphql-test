@@ -1,9 +1,5 @@
-import { INestApplication } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import { NestApplication } from "@nestjs/core";
-import { GraphQLSchemaFactory } from "@nestjs/graphql";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { printSchema } from "graphql";
 
 function postgresqlModule() {
     return TypeOrmModule.forRoot({
@@ -25,12 +21,6 @@ function configModule() {
     });
 }
 
-async function generateGraphQLSchema(app: INestApplication, resolvers) {
-    const gqlSchemaFactory = app.get(GraphQLSchemaFactory);
-    const schema = await gqlSchemaFactory.create(resolvers);
-    console.log(printSchema(schema));
-}
-
 export {
-    postgresqlModule, configModule, generateGraphQLSchema
+    postgresqlModule, configModule
 }

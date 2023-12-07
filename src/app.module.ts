@@ -3,19 +3,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule, GraphQLSchemaBuilderModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { RecipesModule } from './recipes/recipes.module';
 import { CountryModule } from './country/country.module';
 import { configModule, postgresqlModule } from './config/config';
+import { join } from 'path';
 
 @Module({
   imports: [
     configModule(),
     postgresqlModule(),
-    RecipesModule,
     CountryModule,
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true
+      useFactory: async () => ({
+        autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      }),
     }),
   ],
   controllers: [AppController],

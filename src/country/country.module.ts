@@ -2,10 +2,10 @@ import { Module } from "@nestjs/common";
 import { CountryService } from "./countries.service";
 import { Country } from "./country.model";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { CountryResolver } from "./country.resolver";
+import { NewCountryResolver } from "./new-country.resolver";
 
 @Module({
     imports: [TypeOrmModule.forFeature([Country])],
-    providers: [CountryResolver, CountryService]
+    providers: [NewCountryResolver, CountryService]
 })
 export class CountryModule {}

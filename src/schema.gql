@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Country {
+  id: Int!
+  name: String!
+  description: String!
+}
+
+type Query {
+  country(id: Float!): Country!
+  countries: [Country!]!
+}
+
+type Mutation {
+  addCountry(countryData: CountryInput!): Country!
+}
+
+input CountryInput {
+  title: String!
+  description: String
+}
